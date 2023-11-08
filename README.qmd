@@ -1,0 +1,61 @@
+---
+title: "Water Quality Assessment"
+format: gfm
+jupyter: python3
+toc: true
+toc-depth: 2
+---
+
+```{python}
+#| include: false
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("data/Water Quality Testing.csv")
+```
+
+## Description
+This project is an analysis of water quality tests using data from a [Kaggle dataset](https://www.kaggle.com/datasets/shreyanshverma27/water-quality-testing).
+
+The dataset provides 200 rows of water quality testing instances contemplating the following variables:
+
+- pH
+- Temperature (°C)
+- Turbidity (NTU)
+- Dissolved Oxygen (mg/L)
+- Conductivity (µS/cm)
+
+The aim of this project is to assess the data provided through an Exploratory Data Analysis to evaluate the physical and chemical parameters of the water in accordance with the [Brazilian legislation regarding water potability](https://bvsms.saude.gov.br/bvs/saudelegis/gm/2021/prt0888_07_05_2021.html) (original portuguese text).
+
+## Methods
+The `eda.ipynb` and `testing.ipynb` file are the notebooks for the EDA and for the testing of the module developed for the modelling respectively. The `data/` folder includes the `.csv` and `src/` contains the functions for preprocessing and modelling of a Random Forest Regressor. 
+
+## Results
+
+```{python}
+#| echo: false
+#| warning: false
+
+table = df.head().drop(columns="Sample ID")
+table.style.hide_index()
+```
+
+
+```{python}
+#| echo: false
+
+df = df.drop(columns="Sample ID")
+sns.pairplot(df)
+```
+
+
+```{python}
+#| echo: false
+
+plt.figure(figsize=(5,7))
+sns.heatmap(df.corr(), annot=True)
+plt.show()
+```
