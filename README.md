@@ -36,6 +36,8 @@ Regressor.
 
 ## Results
 
+The structure of the data can be viewed here:
+
 <style type="text/css">
 </style>
 
@@ -47,6 +49,16 @@ Regressor.
 | 7.380000 | 22.900000        | 3.200000        | 9.500000                | 327                  |
 | 7.450000 | 20.700000        | 3.800000        | 8.100000                | 352                  |
 
+A pairplot and a heatmap are useful in demonstrating the distribuition
+of data and the linear correlations betwen the variables:
+
 ![](README_files/figure-commonmark/cell-4-output-1.png)
 
 ![](README_files/figure-commonmark/cell-5-output-1.png)
+
+The performance of the model is displayed in code:
+
+    [RandomForestRegressor(n_estimators=1000, random_state=42),
+     {'r2': 0.7120092074666291,
+      'mae': 0.26272562626261914,
+      'rmse': 0.45081460320675126}]

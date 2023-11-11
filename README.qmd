@@ -13,6 +13,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from src import utils as utl
 
 df = pd.read_csv("data/Water Quality Testing.csv")
 ```
@@ -34,7 +35,7 @@ The aim of this project is to assess the data provided through an Exploratory Da
 The `eda.ipynb` and `testing.ipynb` file are the notebooks for the EDA and for the testing of the module developed for the modelling respectively. The `data/` folder includes the `.csv` and `src/` contains the functions for preprocessing and modelling of a Random Forest Regressor. 
 
 ## Results
-
+The structure of the data can be viewed here:
 ```{python}
 #| echo: false
 #| warning: false
@@ -43,14 +44,14 @@ table = df.head().drop(columns="Sample ID")
 table.style.hide_index()
 ```
 
-
+A pairplot and a heatmap are useful in demonstrating the distribuition of data and the linear correlations betwen the variables:
 ```{python}
 #| echo: false
+#| 
 
 df = df.drop(columns="Sample ID")
 sns.pairplot(df)
 ```
-
 
 ```{python}
 #| echo: false
@@ -58,4 +59,26 @@ sns.pairplot(df)
 plt.figure(figsize=(5,7))
 sns.heatmap(df.corr(), annot=True)
 plt.show()
+```
+
+
+```{python}
+#| echo: false
+
+df = pd.read_csv("data/Water Quality Testing.csv")
+df2 = utl.preprocess(df)
+my_list = utl.tt_splitter(df2)
+model = utl.rf_model(
+    my_list["x_train"],
+    my_list["x_test"],
+    my_list["y_train"],
+    my_list["y_test"]
+)
+```
+
+The performance of the model is displayed in code:
+```{python}
+#| echo: false
+
+model
 ```
